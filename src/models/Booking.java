@@ -4,20 +4,20 @@ public class Booking {
     private int bookingId;
     private String customerName;
     private String roomType;
-    private int hours;
+    private int nights;
     private int totalPayment;
 
     public Booking(
             int bookingId,
             String customerName,
             String roomType,
-            int hours,
+            int nights,
             int totalPayment) {
 
         this.bookingId = bookingId;
         this.customerName = customerName;
         this.roomType = roomType;
-        this.hours = hours;
+        this.nights = nights;
         this.totalPayment = totalPayment;
     }
 
@@ -25,19 +25,28 @@ public class Booking {
         return bookingId;
     }
 
-    public String customerName() {
+    public String getCustomerName() {
         return customerName;
     }
 
-    public String roomType() {
+    public String getRoomType() {
         return roomType;
     }
 
-    public int hours() {
-        return hours;
+    public int getNights() {
+        return nights;
     }
 
-    public int totalPayment() {
+    public int getTotalPayment() {
         return totalPayment;
     }
+
+	public void displayBooking() {
+		System.out.println("Booking ID: " + bookingId);
+		System.out.println("Customer Name: " + customerName);
+		System.out.println("Room Type: " + roomType);
+		System.out.println("Nights: " + nights);
+		System.out.println("Total Payment: " + totalPayment);
+		System.out.println("---------------------------");
+	}
 }

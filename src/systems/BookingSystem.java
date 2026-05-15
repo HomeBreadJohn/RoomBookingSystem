@@ -1,64 +1,54 @@
 package systems;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import models.Booking;
+
 public class BookingSystem {
-	    private ArrayList<Booking> bookings = new ArrayList<>();
+	private final ArrayList<Booking> bookings = new ArrayList<>();
 
-	    //Add booking
-	    public void addBooking(Booking booking) {
+	public void addBooking(Booking booking) {
+		bookings.add(booking);
+		System.out.println("Booking added successfully.");
+	}
 
-	        bookings.add(booking);
+	public void viewBookings() {
+		if (bookings.isEmpty()) {
+			System.out.println("No bookings found.");
+			return;
+		}
 
-	        System.out.println("Booking added successfully.");
-	    }
+		for (Booking booking : bookings) {
+			booking.displayBooking();
+		}
+	}
 
-	    //View bookings
-	    public void viewBookings() {
+	public void cancelBooking(int bookingId) {
+		boolean found = false;
+		Iterator<Booking> iterator = bookings.iterator();
 
-	        if (bookings.isEmpty()) {
+		while (iterator.hasNext()) {
+			Booking booking = iterator.next();
+			if (booking.getBookingId() == bookingId) {
+				iterator.remove();
+				System.out.println("Booking cancelled successfully.");
+				found = true;
+				break;
+			}
+		}
 
-	            System.out.println("No bookings found.");
-	            return;
-	        }
+		if (!found) {
+			System.out.println("Booking ID not found.");
+		}
+	}
 
-	        for (Booking booking : bookings) {
-	            booking.displayBooking();
-	        }
-	    }
+	public Booking searchBookingById(int bookingId) {
+		for (Booking booking : bookings) {
+			if (booking.getBookingId() == bookingId) {
+				return booking;
+			}
+		}
 
-	    //Cancel booking
-	    public void cancelBooking(int bookingId) {
-
-	        boolean found = false;
-
-	        for (Booking booking : bookings) {
-
-	            if (booking.getBookingId() == bookingId) {
-
-	                bookings.remove(booking);
-
-	                System.out.println("Booking cancelled successfully.");
-
-	                found = true;
-	                break;
-	            }
-	        }
-
-	        if (!found) {
-	            System.out.println("Booking ID not found.");
-	        }
-	    }
-
-	    // SEARCH BOOKING
-	    public Booking searchBookingById(int bookingId) {
-
-	        for (Booking booking : bookings) {
-
-	            if (booking.getBookingId() == bookingId) {
-	                return booking;
-	            }
-	        }
-
-	        return null;
-	    }
+		return null;
 	}
 }
